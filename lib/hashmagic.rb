@@ -3,7 +3,8 @@ class Hash
   # Recursively sorts the hash and all sub-hashes by key in ascending order.
   #
   def sort_by_key!
-    sorted = Hash[self.sort].each_value do |value|
+    sorted = self.sort {|a, b| a[0].to_s <=> b[0].to_s }
+    sorted = Hash[sorted].each_value do |value|
       if value.is_a? Hash
         value.sort_by_key!
       elsif value.is_a? Array
